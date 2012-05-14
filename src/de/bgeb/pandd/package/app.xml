@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project>
+<project name="pandd_package_app" basedir="." xmlns:artifact="antlib:org.apache.maven.artifact.ant">
+    <description>
+    	builds a archiv for using as application
+    </description>
+
+	<property name="file-type" value="zip"/>
+	
+	<target name="_check-panddfile">
+	    <available file="${pandd.used-arche}/pandd.php" property="panddfile.present"/>
+	</target>
+
+	<target name="_provide_panddfile" depends="_check-panddfile" if="panddfile.present">
+        <copy file="${pandd.used-arche}/pandd.php" tofile="dist/compiled/pandd.php" />
+        <replace file="dist/compiled/pandd.php" token="@add_environment_here@" value="production"/>
+	</target> 
+	
+	<target name="_package" depends="_provide_panddfile" >
+		<artifact:dependencies filesetId="deps.fileset" scopes="compile">
+			<pom refid="pomfile"/>
+   		</artifact:dependencies>
+   		<unzip dest="dist/compiled/lib">
+    		<fileset refid="deps.fileset" />
+		    <patternset>
+		        <exclude name="META-INF/"/>
+		    	<exclude name="pom.xml build.xml"/>
+		    </patternset>
+  		</unzip>
+
+		<zip destfile="dist/${package_file}.${file-type}">
+			<zipfileset dir="./" includes="src/ public/ resources/ conf/ doc/" prefix="${pomfile.artifactId}-${pomfile.version}"/>
+			<!-- Note: pandd-framework itself will be exluded -->
+			<zipfileset dir="dist/compiled/" excludes="/de/bgeb/pandd/" prefix="${pomfile.artifactId}-${pomfile.version}" />
+		</zip>
+		
+		<!-- delete compiled content to avoid double code suggestion in eclipse ide -->
+		<defaultexcludes remove="**/.gitignore"/>
+        <delete includeemptydirs="true" >
+        	<fileset dir="dist/compiled" includes="**/*" excludes=".gitignore" />
+        </delete>
+		<defaultexcludes add="**/.gitignore"/>
+	</target>
+	
+</project>

@@ -1,0 +1,40 @@
+<project name="package" basedir="." xmlns:artifact="antlib:org.apache.maven.artifact.ant">
+    <description>
+    	Build file for Pandd Framework Developing
+    	(there are nothing to configure in this file)
+    </description>
+
+	<artifact:pom id="pomfile" file="pom.xml" />
+	
+	<target name="clean">
+		<ant antfile="lib/de/bgeb/pandd/arche/commonlib/build-impl.xml" dir="." target="clean"/>
+	</target>
+	<target name="update-dependencies" >
+        <defaultexcludes remove="**/.gitignore"/>
+        <delete includeEmptyDirs="true">
+            <fileset dir="lib" includes="**/*" excludes=".gitignore" />
+        </delete>       
+        <defaultexcludes add="**/.gitignore"/>
+		<artifact:dependencies filesetId="deps.fileset" >
+			<pom refid="pomfile"/>
+   		</artifact:dependencies>
+   		<unzip dest="lib">
+    		<fileset refid="deps.fileset" />
+   		</unzip>
+		<ant antfile="lib/de/bgeb/pandd/arche/commonlib/build-impl.xml" dir="." target="post_update-dependencies"/>
+	</target>
+	<target name="test">
+		<ant antfile="lib/de/bgeb/pandd/arche/commonlib/build-impl.xml" dir="." target="test"/>
+	</target>
+	<target name="publish">
+		<ant antfile="lib/de/bgeb/pandd/arche/commonlib/build-impl.xml" dir="." target="publish"/>
+	</target>
+	
+	<target name="mvn_install">
+		<ant antfile="lib/de/bgeb/pandd/arche/commonlib/build-impl.xml" dir="." target="mvn_install"/>
+	</target>
+	<target name="mvn_deploy">
+		<ant antfile="lib/de/bgeb/pandd/arche/commonlib/build-impl.xml" dir="." target="mvn_deploy"/>
+	</target>
+
+</project>
