@@ -4,50 +4,16 @@
   <modelVersion>4.0.0</modelVersion>
   
 	<name>package</name>
-
+      
+      <parent>
+      	<groupId>de.bgeb</groupId>
+      	<artifactId>bgeb-superpom</artifactId>
+      	<version>1.0.0</version>
+      </parent>
+      
 	<groupId>de.bgeb.pandd</groupId>
     <artifactId>package</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <packaging>lib</packaging>
     
-    
-  <!-- needed to download dependencies -->
-   <repositories>
-         <repository>
-               <id>download-server</id>
-               <name>user specified download repo</name>
-               <url>http://localhost:8080/archiva/repository/internal/</url>
-               <layout>default</layout>
-               <snapshots>
-                     <enabled>false</enabled>
-               </snapshots>
-         </repository>
-         <repository>
-               <id>snapshots-download-server</id>
-               <name>user specified snapshot download repo</name>
-               <url>http://localhost:8080/archiva/repository/snapshots/</url>
-               <layout>default</layout>
-               <releases>
-                     <enabled>false</enabled>
-               </releases>
-         </repository>
-   </repositories>
-
-  <!-- needed to upload package -->
-  <distributionManagement>  
-    <repository>
-      <id>upload-server</id>
-      <name>user specified upload repo</name>
-      <url>http://localhost:8080/archiva/repository/internal/</url>
-      <layout>default</layout>
-    </repository>
-    <snapshotRepository>
-        <id>snapshot-upload-server</id>
-        <name>user specified snapshot upload repo</name>
-        <url>http://localhost:8080/archiva/repository/snapshots/</url>
-        <layout>default</layout>
-        <uniqueVersion>false</uniqueVersion>
-    </snapshotRepository>
-  </distributionManagement>
-  
 </project>
