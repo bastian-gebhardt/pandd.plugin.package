@@ -14,6 +14,6 @@
 	<groupId>de.bgeb.pandd</groupId>
     <artifactId>package</artifactId>
     <version>0.1.0-SNAPSHOT</version>
-    <packaging>lib</packaging>
+
     
 </project>

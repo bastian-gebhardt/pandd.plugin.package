@@ -1,40 +1,33 @@
 <project name="package" basedir="." xmlns:artifact="antlib:org.apache.maven.artifact.ant">
     <description>
-    	Build file for Pandd Framework Developing
-    	(there are nothing to configure in this file)
+    	build file for developing new pandd plugins
     </description>
 
 	<artifact:pom id="pomfile" file="pom.xml" />
-	
+
 	<target name="clean">
-		<ant antfile="lib/de/bgeb/pandd/arche/commonlib/build-impl.xml" dir="." target="clean"/>
+			<delete includeEmptyDirs="true">
+				<fileset dir="dist/compiled" includes="**/*" />
+				<fileset dir="dist" includes="*.jar" />
+			</delete>
+	</target>		
+		
+	<target name="m2_package" depends="clean" >
+		<defaultexcludes remove="**/.gitignore"/>
+		<zip destfile="dist/${pomfile.artifactId}-${pomfile.version}.jar" >
+			<zipfileset dir="src/" />
+		</zip>
+		<defaultexcludes add="**/.gitignore"/>
 	</target>
-	<target name="update-dependencies" >
-        <defaultexcludes remove="**/.gitignore"/>
-        <delete includeEmptyDirs="true">
-            <fileset dir="lib" includes="**/*" excludes=".gitignore" />
-        </delete>       
-        <defaultexcludes add="**/.gitignore"/>
-		<artifact:dependencies filesetId="deps.fileset" >
-			<pom refid="pomfile"/>
-   		</artifact:dependencies>
-   		<unzip dest="lib">
-    		<fileset refid="deps.fileset" />
-   		</unzip>
-		<ant antfile="lib/de/bgeb/pandd/arche/commonlib/build-impl.xml" dir="." target="post_update-dependencies"/>
+	<target name="m2_install" depends="m2_package" >
+		<artifact:install file="dist/${pomfile.artifactId}-${pomfile.version}.jar">
+		    <pom refid="pomfile"/>
+		</artifact:install>
 	</target>
-	<target name="test">
-		<ant antfile="lib/de/bgeb/pandd/arche/commonlib/build-impl.xml" dir="." target="test"/>
-	</target>
-	<target name="publish">
-		<ant antfile="lib/de/bgeb/pandd/arche/commonlib/build-impl.xml" dir="." target="publish"/>
-	</target>
-	
-	<target name="mvn_install">
-		<ant antfile="lib/de/bgeb/pandd/arche/commonlib/build-impl.xml" dir="." target="mvn_install"/>
-	</target>
-	<target name="mvn_deploy">
-		<ant antfile="lib/de/bgeb/pandd/arche/commonlib/build-impl.xml" dir="." target="mvn_deploy"/>
-	</target>
+	<target name="m2_deploy" depends="m2_install" >
+	  <artifact:deploy file="dist/${pomfile.artifactId}-${pomfile.version}.jar">
+	    <pom refid="pomfile"/>
+	  </artifact:deploy>
+	</target>	
 
 </project>
