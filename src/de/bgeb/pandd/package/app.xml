@@ -8,12 +8,11 @@
 	<property name="file-type" value="zip"/>
 	
 	<target name="_check-panddfile">
-	    <available file="${pandd.used-arche}/pandd.php" property="panddfile.present"/>
+		<available file="lib/${pomfile.properties.pandd.bootstrap.pro}" property="panddfile.present" />
 	</target>
 
 	<target name="_provide_panddfile" depends="_check-panddfile" if="panddfile.present">
-        <copy file="${pandd.used-arche}/pandd.php" tofile="dist/compiled/pandd.php" />
-        <replace file="dist/compiled/pandd.php" token="@add_environment_here@" value="production"/>
+		<ant antfile="lib/${pomfile.properties.pandd.bootstrap.pro}" target="_provide" />	
 	</target> 
 	
 	<target name="_package" depends="_provide_panddfile" >
