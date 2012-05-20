@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE project>
-<project name="pandd_package_lib" basedir="." xmlns:artifact="antlib:org.apache.maven.artifact.ant">
+<project name="pandd_packaging_lib" basedir="." xmlns:artifact="antlib:org.apache.maven.artifact.ant">
     <description>
     	builds a archiv for using as lib
     </description>
