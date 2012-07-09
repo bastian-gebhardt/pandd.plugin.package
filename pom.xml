@@ -3,9 +3,9 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   
-	<name>package</name>
+	<name>pandd.plugin.package</name>
       
-	<groupId>de.bgeb.pandd</groupId>
+	<groupId>de.bgeb.pandd.plugin</groupId>
     <artifactId>package</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
