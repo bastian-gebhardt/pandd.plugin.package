@@ -40,7 +40,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		<ant antfile="lib/${pomfile.properties.pandd.bootstrap.pro}" target="pandd.bootstrap.pro.run" />	
 	</target> 
 	
-	<target name="_package" depends="_provide_panddfile" >
+	<target name="pandd.packaging.run" depends="_provide_panddfile" >
 		<artifact:dependencies filesetId="deps.fileset" scopes="compile">
 			<pom refid="pomfile"/>
    		</artifact:dependencies>
