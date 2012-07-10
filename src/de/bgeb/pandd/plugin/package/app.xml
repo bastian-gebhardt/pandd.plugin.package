@@ -37,7 +37,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	</target>
 
 	<target name="_provide_panddfile" depends="_check-panddfile" if="panddfile.present">
-		<ant antfile="lib/${pomfile.properties.pandd.bootstrap.pro}" target="_provide" />	
+		<ant antfile="lib/${pomfile.properties.pandd.bootstrap.pro}" target="pandd.bootstrap.pro.run" />	
 	</target> 
 	
 	<target name="_package" depends="_provide_panddfile" >
