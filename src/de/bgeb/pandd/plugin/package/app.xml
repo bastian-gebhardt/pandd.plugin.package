@@ -25,7 +25,7 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 <!DOCTYPE project>
-<project name="pandd.package.app" basedir="." xmlns:artifact="antlib:org.apache.maven.artifact.ant">
+<project name="pandd.plugin.package.app" basedir="." xmlns:artifact="antlib:org.apache.maven.artifact.ant">
     <description>
     	builds a archiv for using as application
     </description>
