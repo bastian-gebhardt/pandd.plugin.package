@@ -3,25 +3,25 @@
 Copyright © 2012 by Bastian Gebhardt
 All rights reserved.
 
-Redistribution and use in source and binary forms, with or without modification, 
+Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
 
-1. Redistributions of source code must retain the above copyright notice, 
+1. Redistributions of source code must retain the above copyright notice,
    this list of conditions and the following disclaimer.
 
-2. Redistributions in binary form must reproduce the above copyright notice, 
-   this list of conditions and the following disclaimer in the documentation 
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
    and/or other materials provided with the distribution.
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
 ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
 FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER 
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, 
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 <!DOCTYPE project>
@@ -32,29 +32,29 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 	<artifact:pom id="pomfile" file="pom.xml" />
 
-	<target name="clean">
+	<target name="clean" description="">
 			<delete includeEmptyDirs="true">
 				<fileset dir="dist/compiled" includes="**/*" />
 				<fileset dir="dist" includes="*.jar" />
 			</delete>
-	</target>		
-		
-	<target name="m2_package" depends="clean" >
+	</target>
+
+	<target name="m2_package" depends="clean" description="">
 		<defaultexcludes remove="**/.gitignore"/>
 		<zip destfile="dist/${pomfile.artifactId}-${pomfile.version}.jar" >
 			<zipfileset dir="src/" />
 		</zip>
 		<defaultexcludes add="**/.gitignore"/>
 	</target>
-	<target name="m2_install" depends="m2_package" >
+	<target name="m2_install" depends="m2_package" description="">
 		<artifact:install file="dist/${pomfile.artifactId}-${pomfile.version}.jar">
 		    <pom refid="pomfile"/>
 		</artifact:install>
 	</target>
-	<target name="m2_deploy" depends="m2_install" >
+	<target name="m2_deploy" depends="m2_install" description="">
 	  <artifact:deploy file="dist/${pomfile.artifactId}-${pomfile.version}.jar">
 	    <pom refid="pomfile"/>
 	  </artifact:deploy>
-	</target>	
+	</target>
 
 </project>
