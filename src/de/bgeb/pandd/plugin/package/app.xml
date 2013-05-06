@@ -3,25 +3,25 @@
 Copyright © 2012 by Bastian Gebhardt
 All rights reserved.
 
-Redistribution and use in source and binary forms, with or without modification, 
+Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
 
-1. Redistributions of source code must retain the above copyright notice, 
+1. Redistributions of source code must retain the above copyright notice,
    this list of conditions and the following disclaimer.
 
-2. Redistributions in binary form must reproduce the above copyright notice, 
-   this list of conditions and the following disclaimer in the documentation 
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
    and/or other materials provided with the distribution.
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
 ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
 FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER 
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, 
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 <!DOCTYPE project>
@@ -31,15 +31,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </description>
 
 	<property name="file-type" value="zip"/>
-	
+
 	<target name="_check-panddfile">
 		<available file="lib/${pomfile.properties.pandd.bootstrap.pro}" property="panddfile.present" />
 	</target>
 
 	<target name="_provide_panddfile" depends="_check-panddfile" if="panddfile.present">
-		<ant antfile="lib/${pomfile.properties.pandd.bootstrap.pro}" target="pandd.bootstrap.pro.run" />	
-	</target> 
-	
+		<ant antfile="lib/${pomfile.properties.pandd.bootstrap.pro}" target="pandd.bootstrap.pro.run" />
+	</target>
+
 	<target name="pandd.packaging.run" depends="_provide_panddfile" >
 		<artifact:dependencies filesetId="deps.fileset" scopes="compile">
 			<pom refid="pomfile"/>
@@ -53,11 +53,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   		</unzip>
 
 		<zip destfile="dist/${package_file}.${file-type}">
-			<zipfileset dir="./" includes="src/ public/ resources/ conf/ doc/" prefix="${pomfile.artifactId}-${pomfile.version}"/>
+			<zipfileset dir="./" includes="src/ public/ resources/ conf/ doc/ cli/" prefix="${pomfile.artifactId}-${pomfile.version}"/>
 			<!-- Note: pandd-framework itself will be exluded -->
 			<zipfileset dir="dist/compiled/" excludes="/de/bgeb/pandd/" prefix="${pomfile.artifactId}-${pomfile.version}" />
 		</zip>
-		
+
 		<!-- delete compiled content to avoid double code suggestion in eclipse ide -->
 		<defaultexcludes remove="**/.gitignore"/>
         <delete includeemptydirs="true" >
@@ -65,5 +65,5 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </delete>
 		<defaultexcludes add="**/.gitignore"/>
 	</target>
-	
+
 </project>
